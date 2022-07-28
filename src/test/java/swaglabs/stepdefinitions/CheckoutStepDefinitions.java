@@ -28,11 +28,6 @@ public class CheckoutStepDefinitions {
         // TODO: Implement me
     }
 
-    @When("Colin/he reviews his order")
-    public void reviewsOrder() {
-        // TODO: Implement me
-    }
-
     /**
      * Open the checkout page and enter customer personal details
      */

@@ -93,27 +93,14 @@ public class CartStepDefinitions {
     }
 
     /**
-     * Open the shopping cart page directly
+     * Different ways to open the shopping cart
      */
     @Given("Colin/he has opened the shopping cart")
+    @Given("Colin/he views his shopping cart")
+    @When("Colin/he reviews his order")
+    @When("Colin/he opens the shopping cart")
     public void opensCartPage() {
         navigate.toTheShoppingCart();
-    }
-
-    /**
-     * Open the shopping cart page directly (as a WHEN step)
-     */
-    @Given("Colin/he views his shopping cart")
-    public void viewShoppingCart() {
-        // TODO: Implement me
-    }
-
-    /**
-     * Navigate to the shopping cart via the shopping cart badge
-     */
-    @When("Colin/he opens the shopping cart")
-    public void opensCart() {
-        // TODO: Implement me
     }
 
     @When("Colin/he continues shopping")
