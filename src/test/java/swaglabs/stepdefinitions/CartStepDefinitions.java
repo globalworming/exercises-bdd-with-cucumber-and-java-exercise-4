@@ -89,7 +89,7 @@ public class CartStepDefinitions {
 
     @When("Colin/he removes {string} from the cart")
     public void heRemovesFromTheCart(String item) {
-        cartActions.removeFromCart(item);
+        inventoryActions.removeFromCart(item);
     }
 
     @When("Colin/he removes {string} from the cart summary")
@@ -112,7 +112,6 @@ public class CartStepDefinitions {
         navigate.toTheShoppingCart();
         cartActions.startCheckout();
         checkout.enterCustomerDetails(CustomerDetails.about("Colin"));
-        checkout.confirmOrder();
     }
 
     @When("Colin/he continues shopping")
