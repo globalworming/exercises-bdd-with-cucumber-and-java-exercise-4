@@ -18,10 +18,6 @@ public class InventoryActions extends UIInteractionSteps {
         return PageElement.locatedBy(".inventory_item").containingText(item);
     }
 
-    private SearchableTarget cartItemWithName(String item) {
-        return PageElement.locatedBy(".cart_item").containingText(item);
-    }
-
     @Step("View product details for '{0}'")
     public void viewDetailsFor(String item) {
         find(Link.withText(item)).click();
@@ -30,10 +26,5 @@ public class InventoryActions extends UIInteractionSteps {
     @Step("Remove '{0}' from the cart")
     public void removeFromCart(String item) {
         find(Button.withText("Remove").inside(inventoryItemWithName(item))).click();
-    }
-
-    @Step("Remove '{0}' from the cart summary")
-    public void removeFromCartSummary(String item) {
-        find(Button.withText("Remove").inside(cartItemWithName(item))).click();
     }
 }

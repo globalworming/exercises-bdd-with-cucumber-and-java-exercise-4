@@ -52,12 +52,12 @@ public class LoginStepDefinitions {
     @Given("Colin/he has logged onto the application")
     public void aRegisteredUser() {
         login.openTheLoginPage();
-       login.withValidCredentials();
+        login.withValidCredentials();
     }
 
     @When("Colin/he attempts to login with the following credentials:")
     public void attemptsToLoginWithTheFollowingCredentials(UserCredentials userCredentials) {
-        login.withCredentials(userCredentials.username(),userCredentials.password());
+        login.withCredentials(userCredentials.username(), userCredentials.password());
     }
 
     @Then("Colin/he should be presented with the error message {}")

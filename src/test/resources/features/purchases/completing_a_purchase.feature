@@ -1,4 +1,3 @@
-@pending
 Feature: Completing a purchase
 
   Background:
@@ -18,7 +17,6 @@ Feature: Completing a purchase
         |            | Collector | ABC-123       | Error: First Name is required  |
         | Colin      |           | ABC-123       | Error: Last Name is required   |
         | Colin      | Collector |               | Error: Postal Code is required |
-
 
   Rule: Customers should see a summary of their order before they complete their purchase
     Example: Colin purchases two items and sees them both appear in the purchase summary

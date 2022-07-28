@@ -8,7 +8,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import swaglabs.actions.cart.CartActions;
 import swaglabs.actions.cart.CartItems;
+import swaglabs.actions.cart.CheckoutActions;
 import swaglabs.actions.catalog.CatalogItems;
 import swaglabs.actions.catalog.InventoryActions;
 import swaglabs.actions.catalog.ProductDetailsActions;
@@ -26,7 +28,7 @@ public class CartStepDefinitions {
     InventoryActions inventoryActions;
 
     @Steps
-    InventoryActions cartActions;
+    CartActions cartActions;
 
     @Steps
     CartItems cartItems;
@@ -39,6 +41,9 @@ public class CartStepDefinitions {
 
     @Steps
     NavigateActions navigate;
+
+    @Steps
+    CheckoutActions checkout;
 
     /**
      * Add an item on the catalog page to the cart
@@ -97,15 +102,24 @@ public class CartStepDefinitions {
      */
     @Given("Colin/he has opened the shopping cart")
     @Given("Colin/he views his shopping cart")
-    @When("Colin/he reviews his order")
     @When("Colin/he opens the shopping cart")
     public void opensCartPage() {
         navigate.toTheShoppingCart();
     }
 
+    @When("Colin/he reviews his order")
+    public void reviewOrder() {
+        navigate.toTheShoppingCart();
+        cartActions.startCheckout();
+        checkout.enterCustomerDetails(CustomerDetails.about("Colin"));
+        checkout.confirmOrder();
+    }
+
     @When("Colin/he continues shopping")
     public void continuesShopping() {
-        // TODO: Implement me
+        navigate.toTheShoppingCart();
+        cartActions.startCheckout();
+        checkout.enterCustomerDetails(CustomerDetails.about("Colin"));
     }
 
 
@@ -121,7 +135,7 @@ public class CartStepDefinitions {
 
     @When("Colin/he provides the following personal details:")
     public void heProvidesTheFollowingDetails(CustomerDetails customerDetails) {
-        // TODO: Implement me
+        checkout.enterCustomerDetails(customerDetails);
     }
 }
 

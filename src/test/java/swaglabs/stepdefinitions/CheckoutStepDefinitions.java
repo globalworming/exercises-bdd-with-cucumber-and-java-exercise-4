@@ -4,13 +4,41 @@ import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import net.thucydides.core.annotations.Steps;
+import swaglabs.actions.cart.CartActions;
+import swaglabs.actions.cart.CartItems;
+import swaglabs.actions.cart.CheckoutActions;
+import swaglabs.actions.catalog.InventoryActions;
+import swaglabs.actions.navigation.NavigateActions;
+import swaglabs.actions.purchase.ConfirmationPage;
 import swaglabs.model.CheckoutItem;
+import swaglabs.model.CustomerDetails;
 import swaglabs.model.TotalItemPrice;
 
 import java.util.List;
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class CheckoutStepDefinitions {
+
+    @Steps
+    InventoryActions inventoryActions;
+
+    @Steps
+    NavigateActions navigate;
+
+    @Steps
+    CartActions cartActions;
+
+    @Steps
+    CheckoutActions checkout;
+
+    @Steps
+    CartItems cart;
+
+    @Steps
+    ConfirmationPage confirmationPage;
 
     /**
      * The present tense tells us this is something Colin is doing now
@@ -25,7 +53,9 @@ public class CheckoutStepDefinitions {
      */
     @Given("Colin/he has selected an item and checked out his cart")
     public void colinHasCheckedOutHisCart() {
-        // TODO: Implement me
+        inventoryActions.addToCart("Sauce Labs Backpack");
+        navigate.toTheShoppingCart();
+        cartActions.startCheckout();
     }
 
     /**
@@ -33,7 +63,9 @@ public class CheckoutStepDefinitions {
      */
     @When("Colin/he checks out his cart providing his personal details")
     public void checksOutWithPersonalDetails() {
-        // TODO: Implement me
+        navigate.toTheShoppingCart();
+        cartActions.startCheckout();
+        checkout.enterCustomerDetails(CustomerDetails.about("Colin"));
     }
 
     @When("Colin/he checks out the following items:")
@@ -43,12 +75,12 @@ public class CheckoutStepDefinitions {
 
     @When("Colin/he confirms his order")
     public void confirmsOrder() {
-        // TODO: Implement me
+        checkout.confirmOrder();
     }
 
     @Then("Colin/he should be informed {string}")
     public void shouldBeInformedThat(String message) {
-        // TODO: Implement me
+        assertThat(confirmationPage.thankYouMessage()).contains(message);
     }
 
     @DataTableType
@@ -69,15 +101,15 @@ public class CheckoutStepDefinitions {
 
     @Then("Colin/he should be presented with a summary of his purchase including:")
     public void presentSummaryOfPurchases(List<CheckoutItem> expectedItems) {
-        // TODO: Implement me
+        assertThat(cart.items()).containsExactlyElementsOf(expectedItems);
     }
 
     /**
      * Check the total price details displayed on the checkout confirmation page
      */
     @Then("the total price should be:")
-    public void totalPriceShouldBe(TotalItemPrice expectedPrices) {
-        // TODO: Implement me
+    public void totalPriceShouldBe(TotalItemPrice expectedPrice) {
+        assertThat(cart.totalItemPrice()).isEqualTo(expectedPrice);
     }
 }
 
