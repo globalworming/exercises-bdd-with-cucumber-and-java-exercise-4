@@ -11,8 +11,16 @@ public class LoginActions extends UIInteractionSteps {
 
     @Step("Login with valid credentials")
     public void withValidCredentials() {
-        $(LoginForm.USERNAME).sendKeys("standard_user");
-        $(LoginForm.PASSWORD).sendKeys("secret_sauce");
+        withCredentials("standard_user","secret_sauce");
+    }
+
+    public void withCredentials(String username, String password) {
+        $(LoginForm.USERNAME).sendKeys(username);
+        $(LoginForm.PASSWORD).sendKeys(password);
         $(LoginForm.LOGIN).click();
+    }
+
+    public String errorMessage() {
+        return $(LoginForm.ERROR_MESSAGE).getText();
     }
 }
