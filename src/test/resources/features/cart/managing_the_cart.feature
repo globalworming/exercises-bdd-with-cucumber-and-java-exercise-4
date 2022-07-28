@@ -29,7 +29,7 @@ Feature: Managing the cart
         | Sauce Labs Backpack   |
         | Sauce Labs Bike Light |
       And Colin has opened the shopping cart
-      When he removes "Sauce Labs Backpack" from the cart
+      When he removes "Sauce Labs Backpack" from the cart summary
       Then he should see the following items:
         | Sauce Labs Bike Light |
 

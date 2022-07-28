@@ -87,6 +87,11 @@ public class CartStepDefinitions {
         cartActions.removeFromCart(item);
     }
 
+    @When("Colin/he removes {string} from the cart summary")
+    public void heRemovesFromTheCartSummary(String item) {
+        cartActions.removeFromCartSummary(item);
+    }
+
     /**
      * Open the shopping cart page directly
      */
